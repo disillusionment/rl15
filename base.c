@@ -24,8 +24,8 @@
 #define ANSICLR  "\x1B[0;0H\x1B[2J"
 
 
-int MapDisplayWidth  = 13;
-int MapDisplayHeight = 13; 
+int MapDisplayWidth  = 7;
+int MapDisplayHeight = 7; 
 int PlayerXLocation = 8;
 int PlayerYLocation = 10;
 
@@ -42,7 +42,9 @@ void printOffset(int spaces) {
 
 void printFrameTB(void) {
      printf(ANSIBLU "+");
-     printf("--------------------------");
+     for(int i=0 ; i < MapDisplayWidth ; i++) {
+        printf("--");
+     }
      printf("+\n" ANSINRM);
 }
 
