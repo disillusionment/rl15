@@ -1,7 +1,7 @@
 /* * * * * * * * * * * * * * * * * * * * 
  * 
  * Roguelike in 15 steps
- * test.c  7-24-2017
+ * 
  * base.c  7-25-2017
  *
  * * * * * * * * * * * * * * * * * * * */
@@ -26,7 +26,7 @@
 
 int MapDisplayWidth  = 13;
 int MapDisplayHeight = 13; 
-int PlayerXLocation = 6;
+int PlayerXLocation = 8;
 int PlayerYLocation = 10;
 
 void clearScreen(void) {
@@ -96,9 +96,6 @@ char getInput(void) {
      system ("/bin/stty raw");
      kbin = getchar();
      system ("/bin/stty cooked");
-     if(kbin=='q') {
-          exit(0);
-     }
      return(kbin);
 }
 
@@ -118,10 +115,10 @@ void displayScreen(void) {
 
 
 void impassable(void) {
-   printf("Impassible!");
+   printf("Impassable!");
 }
 
-int passible(int checkMapX, int checkMapY) {
+int passable(int checkMapX, int checkMapY) {
      char checkPass = map[checkMapX][checkMapY];
      if( (checkPass != 'X') &&
          (checkPass != 'x'))
@@ -139,15 +136,15 @@ int main(int argc, char *argv[]) {
           action = getInput();
                switch(action) {
 		  case '4':
-		       if(passible(PlayerXLocation, PlayerYLocation - 1)) {
+		       if(passable(PlayerXLocation, PlayerYLocation - 1)) {
                             PlayerYLocation--;
 		       }  else  {
                             impassable();
                        }
                        break;
 		  case '1':
-		       if(passible(PlayerXLocation,PlayerYLocation-1) && 
-                          passible(PlayerXLocation+1,PlayerYLocation)) {
+		       if(passable(PlayerXLocation,PlayerYLocation-1) && 
+                          passable(PlayerXLocation+1,PlayerYLocation)) {
                             PlayerYLocation--;
 		            PlayerXLocation++;
 		       }  else  {
@@ -155,28 +152,28 @@ int main(int argc, char *argv[]) {
                        }
                        break;
 		  case '2':
-                       if(passible(PlayerXLocation+1,PlayerYLocation)) {
+                       if(passable(PlayerXLocation+1,PlayerYLocation)) {
 		            PlayerXLocation++;
 		       }  else  {
                             impassable();
                        }
                        break;
 		  case '3':
-		       if(passible(PlayerXLocation, PlayerYLocation+1) && 
-                          passible(PlayerXLocation+1, PlayerYLocation)) {
+		       if(passable(PlayerXLocation, PlayerYLocation+1) && 
+                          passable(PlayerXLocation+1, PlayerYLocation)) {
                             PlayerYLocation++;
 		            PlayerXLocation++;
 		       }  else  {  impassable(); } break;
 		  case '6':
-                       if(passible(PlayerXLocation, PlayerYLocation+1)) {
+                       if(passable(PlayerXLocation, PlayerYLocation+1)) {
 		            PlayerYLocation++;
 		        }  else  {
                              impassable();
                         }
                         break;
 		  case '9':
-                       if(passible(PlayerXLocation, PlayerYLocation+1) && 
-                          passible(PlayerXLocation-1, PlayerYLocation)) {
+                       if(passable(PlayerXLocation, PlayerYLocation+1) && 
+                          passable(PlayerXLocation-1, PlayerYLocation)) {
 		            PlayerYLocation++;
 		            PlayerXLocation--;
 		       }  else  {  
@@ -184,22 +181,29 @@ int main(int argc, char *argv[]) {
                        }
                        break;
 		  case '8':
-                       if(passible(PlayerXLocation-1,PlayerYLocation)) {
+                       if(passable(PlayerXLocation-1,PlayerYLocation)) {
 		            PlayerXLocation--;
 		       }  else  {
                             impassable(); 
                        }
                        break;
 		  case '7':
-                       if(passible(PlayerXLocation, PlayerYLocation-1) && 
-                          passible(PlayerXLocation-1,PlayerYLocation)) {
+                       if(passable(PlayerXLocation, PlayerYLocation-1) && 
+                          passable(PlayerXLocation-1,PlayerYLocation)) {
 		            PlayerYLocation--;
 		            PlayerXLocation--;
 		       }  else  {  
                             impassable(); }
                        break;
-		  default:
+		  case 'q':
+		       exit(0);
 		       break;
+                  default:
+		       printf(ANSICYN "\n Unknown Command.\n");
+                       sleep(1);
+                       break;
 		  }
+
+
           }
 }
