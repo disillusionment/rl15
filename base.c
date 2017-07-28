@@ -12,7 +12,7 @@
 #include "map.h"
 
 
-// ANSI Escape Code Defines
+/* ANSI Escape Code Defines */
 #define ANSINRM  "\x1B[0m"
 #define ANSIRED  "\x1B[31m"
 #define ANSIGRN  "\x1B[32m"
@@ -36,37 +36,39 @@ void clearScreen(void) {
 
 
 void printOffset(int spaces) {
-
-     for(int i=0;i<=spaces;i++) {
+     int i;
+     for(i=0;i<=spaces;i++) {
           printf("  ");
      }
 }
 
 void printFrameTB(void) {
+     /* Print Frame Top and Bottom */
+     int i;
      printf(ANSIBLU "+");
-     for(int i=0 ; i < MapDisplayWidth ; i++) {
+     for(i=0 ; i < MapDisplayWidth ; i++) {
         printf("--");
      }
      printf("+\n" ANSINRM);
 }
 
 void displayMap(int Width, int Height, int CenterX, int CenterY) {
-    // CenterX-6 to CenterX+6
-    // CenterY-6 to CenterY+6
+    /* CenterX-6 to CenterX+6 */
+    /* CenterY-6 to CenterY+6 */
     int IterateX, IterateY = 0;
-    int XRange = ((MapDisplayWidth -1) / 2);
-    int YRange = ((MapDisplayHeight -1) / 2);
+    int XRange = ((Width -1) / 2);
+    int YRange = ((Height -1) / 2);
 
-    // display border
+    /* display border */
     clearScreen();
     printOffset(10);
     printFrameTB();
 
-    // TODO
-    // if PlayerX < XRange or > MapWidth - Xrange move player instead of map
-    // same with PlayerY
+    /* TODO
+    if PlayerX < XRange or > MapWidth - Xrange move player instead of map
+    same with PlayerY
      
-    // MAP MOVE
+    PAN MAP */
     for(IterateX = CenterX - XRange ; IterateX <= CenterX + XRange ; IterateX++) {
         printOffset(10);
         printf(ANSIBLU "|" ANSINRM);
@@ -80,19 +82,19 @@ void displayMap(int Width, int Height, int CenterX, int CenterY) {
         }
         printf(ANSIBLU "|\n" ANSINRM);
     }
-    // END MAP MOVE
+    /* END PAN MAP */
      
-    // PLAYER MOVES MAP DOESN'T
-    // Figure out where @ goes.
+    /* PLAYER MOVES MAP DOESN'T */
+    /* Figure out where @ goes. */
      
      
-    // print rest of map.
-    // END OF PLAYER MOVES
+    /* print rest of map. */
+    /* END OF PLAYER MOVES */
     printOffset(10);
     printFrameTB();
 }
 
-void displayStats(void) {};
+void displayStats(void) {}
 
 char getInput(void) {
     int kbin;
@@ -208,4 +210,5 @@ int main(int argc, char *argv[]) {
                 break;
         }
     }
+return (0);
 }
