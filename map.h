@@ -28,7 +28,7 @@ char map[25][25] = {
  "xxxMMx.............xMMxxx",
  "xxxMMx.............xMMxxx",
  "xxxMMx.............xMMxxx",
- "xxxMMx.............xMMxxx",
+ "xxxxxxxxxxxxxxxxxxxxxxxxx",
  "xxxxxxxxxxxxxxxxxxxxxxxxx",
  "xxxxxxxxxxxxxxxxxxxxxxxxx",
  "xxxxxxxxxxxxxxxxxxxxxxxxx",
